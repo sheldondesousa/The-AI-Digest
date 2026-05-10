@@ -1,6 +1,5 @@
 import Parser from 'rss-parser';
 import db from './db.js';
-import { summarizeArticle } from './summarize.js';
 
 const parser = new Parser({
   headers: {
@@ -27,21 +26,14 @@ export async function refreshFeeds() {
         const exists = db.prepare('SELECT id FROM articles WHERE url = ?').get(item.link);
         if (exists) continue;
 
-        const content = item.contentSnippet || item.content || item.summary || item.title;
-        let summary = null;
-
-        try {
-          summary = await summarizeArticle(item.title, content);
-        } catch (err) {
-          console.error(`Summarization failed for: ${item.title}`, err.message);
-        }
+        const content = item.contentSnippet || item.content || item.summary || null;
 
         insertArticle.run(
           item.title,
           item.link,
           feed.name,
           feed.category,
-          summary,
+          content,
           item.pubDate || new Date().toISOString()
         );
 
