@@ -32,6 +32,10 @@ db.exec(`
 db.prepare(`DELETE FROM feeds WHERE url IN (
   'https://a16z.com/feed/',
   'https://www.anthropic.com/news/rss.xml',
+  'https://www.anthropic.com/rss.xml',
+  'https://openai.com/blog/rss.xml',
+  'https://deepmind.google/blog/rss.xml',
+  'https://blog.google/topics/health/rss/',
   'https://news.ycombinator.com/rss',
   'https://arxiv.org/rss/cs.AI',
   'https://arxiv.org/rss/cs.LG',
@@ -40,10 +44,11 @@ db.prepare(`DELETE FROM feeds WHERE url IN (
 )`).run();
 
 const seedFeeds = [
-  { name: 'Anthropic News',  url: 'https://www.anthropic.com/rss.xml',       category: 'AI Research' },
-  { name: 'OpenAI Blog',     url: 'https://openai.com/blog/rss.xml',          category: 'AI Research' },
-  { name: 'Google DeepMind', url: 'https://deepmind.google/blog/rss.xml',     category: 'AI Research' },
-  { name: 'Google Health',   url: 'https://blog.google/topics/health/rss/',   category: 'Health'      },
+  // Anthropic has no official RSS — this is a community-maintained mirror of anthropic.com/news
+  { name: 'Anthropic News',  url: 'https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml', category: 'AI Research' },
+  { name: 'OpenAI Blog',     url: 'https://openai.com/news/rss.xml',                                   category: 'AI Research' },
+  { name: 'Google DeepMind', url: 'https://blog.google/technology/google-deepmind/rss/',               category: 'AI Research' },
+  { name: 'Google Health',   url: 'https://blog.google/products-and-platforms/products/google-health/rss/', category: 'Health' },
 ];
 
 const insertFeed = db.prepare(`INSERT OR IGNORE INTO feeds (name, url, category) VALUES (?, ?, ?)`);
