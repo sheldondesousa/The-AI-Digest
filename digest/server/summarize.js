@@ -3,7 +3,8 @@ import Anthropic from '@anthropic-ai/sdk';
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 export async function summarizeArticle(title, content) {
-  const text = content?.slice(0, 3000) || title;
+  const text = (content?.trim() || title?.trim() || '').slice(0, 3000);
+  if (!text) return null;
 
   const message = await client.messages.create({
     model: 'claude-sonnet-4-6',
@@ -22,5 +23,6 @@ Content: ${text}`,
     ],
   });
 
-  return message.content[0].text;
+  const block = message.content[0];
+  return (block?.type === 'text' && block.text) ? block.text : null;
 }

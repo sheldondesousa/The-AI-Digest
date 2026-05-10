@@ -29,8 +29,8 @@ db.exec(`
 `);
 
 const seedFeeds = [
-  { name: 'a16z', url: 'https://a16z.com/feed/', category: 'Venture Capital' },
-  { name: 'Anthropic Blog', url: 'https://www.anthropic.com/news/rss.xml', category: 'AI Research' },
+  // a16z (https://a16z.com/feed/) and Anthropic Blog (https://www.anthropic.com/news/rss.xml)
+  // were removed — both URLs 404. Add working feed URLs via the API or UI.
 ];
 
 const insertFeed = db.prepare(`INSERT OR IGNORE INTO feeds (name, url, category) VALUES (?, ?, ?)`);
