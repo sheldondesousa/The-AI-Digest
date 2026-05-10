@@ -2,7 +2,12 @@ import Parser from 'rss-parser';
 import db from './db.js';
 import { summarizeArticle } from './summarize.js';
 
-const parser = new Parser();
+const parser = new Parser({
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (compatible; RSS-reader/1.0)',
+    'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+  },
+});
 
 export async function refreshFeeds() {
   const feeds = db.prepare('SELECT * FROM feeds WHERE is_active = 1').all();
