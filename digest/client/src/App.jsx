@@ -10,7 +10,7 @@ export default function App() {
   const [filters, setFilters] = useState({ category: '', unread: false })
   const [refreshing, setRefreshing] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -84,11 +84,11 @@ export default function App() {
           ) : articles.length === 0 ? (
             <div className="empty">No articles yet. Hit Refresh Now to pull feeds.</div>
           ) : (
-            <div className="article-list">
+            <ul className="story-list">
               {articles.map(article => (
                 <ArticleCard key={article.id} article={article} onMarkRead={handleMarkRead} />
               ))}
-            </div>
+            </ul>
           )}
         </main>
       )}

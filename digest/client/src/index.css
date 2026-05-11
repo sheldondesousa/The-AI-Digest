@@ -12,21 +12,23 @@
   --unread-bg: #c9a84c12;
   --input-bg: #1a1a1a;
   --badge-bg: #2a2a2a;
+  --category-color: #9d9dd4;
 }
 
 /* Light theme */
 [data-theme="light"] {
-  --bg: #f5f2eb;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --border: #ddd5c0;
-  --text: #1a1a1a;
-  --text-secondary: #444;
-  --muted: #777;
+  --border: #e5e5e5;
+  --text: #111111;
+  --text-secondary: #444444;
+  --muted: #888888;
   --gold: #8a6200;
   --gold-dim: #b8860b;
-  --unread-bg: #b8860b12;
+  --unread-bg: #b8860b08;
   --input-bg: #fff;
-  --badge-bg: #ede8dc;
+  --badge-bg: #f0f0f0;
+  --category-color: #7b7bb5;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +36,7 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Georgia', serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
   transition: background 0.25s, color 0.25s;
 }
@@ -58,6 +60,7 @@ h1 {
   font-size: 1.8rem;
   color: var(--gold);
   letter-spacing: 0.04em;
+  font-family: 'Georgia', serif;
 }
 
 .subtitle {
@@ -166,96 +169,78 @@ h1 {
 
 .toggle input { accent-color: var(--gold); cursor: pointer; }
 
-/* Article List */
-.article-list { display: flex; flex-direction: column; }
+/* Story List */
+.story-list {
+  list-style: none;
+}
 
-.article-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+.story-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.story-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.story-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.story-thumbnail {
+  flex-shrink: 0;
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
   border-radius: 6px;
-  margin-bottom: 1rem;
-  padding: 1.5rem;
-  transition: border-color 0.2s;
 }
 
-.article-card.unread {
-  background: var(--unread-bg);
-  border-color: var(--gold-dim);
+.story-thumbnail--placeholder {
+  background: var(--badge-bg);
+  border-radius: 6px;
 }
 
-.card-meta {
+.story-content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.story-meta {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
-.unread-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  flex-shrink: 0;
-}
-
-.source {
-  color: var(--gold);
-  font-size: 0.75rem;
-  font-style: italic;
-  letter-spacing: 0.05em;
-}
-
-.badge {
-  background: var(--badge-bg);
-  border-radius: 3px;
+.story-date {
+  font-size: 0.8125rem;
   color: var(--muted);
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
-  padding: 0.2rem 0.5rem;
-  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 0.01em;
 }
 
-.date {
-  color: var(--muted);
-  font-size: 0.75rem;
-  margin-left: auto;
+.story-category {
+  font-size: 0.8125rem;
+  color: var(--category-color);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-.card-title {
-  font-size: 1.15rem;
-  line-height: 1.4;
-  margin-bottom: 0.75rem;
-}
-
-.card-title a {
+.story-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.45;
   color: var(--text);
-  text-decoration: none;
-  transition: color 0.2s;
 }
 
-.card-title a:hover { color: var(--gold); }
-
-.summary {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  margin-bottom: 1rem;
+.story-link:hover .story-title {
+  color: var(--gold);
 }
-
-.mark-read-btn {
-  background: none;
-  border: none;
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  padding: 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.mark-read-btn:hover { color: var(--text); }
 
 .loading, .empty {
   color: var(--muted);
@@ -266,7 +251,7 @@ h1 {
 
 /* Sources Tab */
 .sources-tab { max-width: 640px; }
-.sources-tab h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 1.5rem; }
+.sources-tab h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Georgia', serif; }
 .sources-tab h3 {
   color: var(--muted);
   font-size: 0.8rem;
@@ -328,7 +313,7 @@ h1 {
 
 /* Scheduler Panel */
 .scheduler-panel { max-width: 480px; }
-.scheduler-panel h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 1.5rem; }
+.scheduler-panel h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Georgia', serif; }
 
 .scheduler-card {
   background: var(--surface);
