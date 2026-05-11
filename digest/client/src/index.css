@@ -67,7 +67,7 @@ header {
 }
 
 h1 {
-  font-size: 1.8rem;
+  font-size: 2.3rem;
   color: #18181B;
   letter-spacing: 0.04em;
   font-family: var(--font-title);
@@ -261,7 +261,7 @@ h1 {
 
 .story-title {
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.45;
   color: var(--text);
   font-family: var(--font-title);
