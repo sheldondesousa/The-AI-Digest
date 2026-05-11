@@ -13,6 +13,10 @@ export default function ArticleCard({ article, onMarkRead }) {
     // invalid URL
   }
 
+  const preview = article.summary
+    ? article.summary.slice(0, 300) + (article.summary.length > 300 ? '...' : '')
+    : null
+
   function handleCheckbox(e) {
     e.preventDefault()
     e.stopPropagation()
@@ -43,6 +47,7 @@ export default function ArticleCard({ article, onMarkRead }) {
             )}
           </div>
           <h2 className="story-title">{article.title}</h2>
+          {preview && <p className="story-preview">{preview}</p>}
           <div className="story-footer">
             <label className="read-checkbox" onClick={handleCheckbox}>
               <input
