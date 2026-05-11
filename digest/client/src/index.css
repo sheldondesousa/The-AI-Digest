@@ -5,7 +5,7 @@
   --surface: #1a1a1a;
   --border: #2a2a2a;
   --text: #e8e8e8;
-  --text-secondary: #b0b0b0;
+  --text-secondary: #27272A;
   --muted: #71717A;
   --tab-active: #A1A1AA;
   --tab-inactive: #71717A;
@@ -64,7 +64,7 @@ header {
 
 h1 {
   font-size: 1.8rem;
-  color: var(--gold);
+  color: #18181B;
   letter-spacing: 0.04em;
   font-family: 'Georgia', serif;
 }
@@ -131,19 +131,19 @@ h1 {
 /* Buttons */
 .refresh-btn {
   background: transparent;
-  border: 1px solid var(--gold-dim);
+  border: 1px solid #27272A;
   border-radius: 4px;
-  color: var(--gold);
+  color: #27272A;
   cursor: pointer;
   font-family: inherit;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   padding: 0.5rem 1.2rem;
   text-transform: uppercase;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
-.refresh-btn:hover:not(:disabled) { background: var(--gold-dim); color: var(--bg); }
+.refresh-btn:hover:not(:disabled) { background: #27272A; color: #ffffff; }
 .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Filter Bar */
