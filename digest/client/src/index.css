@@ -275,6 +275,14 @@ h1 {
   color: var(--text-secondary);
 }
 
+.story-preview {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 .story-footer {
   margin-top: 4px;
 }
