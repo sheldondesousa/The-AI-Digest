@@ -8,6 +8,13 @@ export default function FilterBar({ categories, filters, onChange }) {
         <option value="">All Categories</option>
         {categories.map(c => <option key={c} value={c}>{c}</option>)}
       </select>
+      <select
+        value={filters.sort}
+        onChange={e => onChange(f => ({ ...f, sort: e.target.value }))}
+      >
+        <option value="desc">Recent first</option>
+        <option value="asc">Oldest first</option>
+      </select>
       <label className="toggle">
         <input
           type="checkbox"

@@ -146,8 +146,9 @@ h1 {
 .filter-bar {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .filter-bar select {
@@ -158,6 +159,7 @@ h1 {
   font-family: inherit;
   font-size: 0.85rem;
   padding: 0.4rem 0.8rem;
+  cursor: pointer;
 }
 
 .toggle {
@@ -220,13 +222,15 @@ h1 {
   flex: 1;
   min-width: 0;
   padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .story-meta {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 8px;
 }
 
 .story-date {
@@ -251,6 +255,32 @@ h1 {
 }
 
 .story-link:hover .story-title {
+  color: var(--gold);
+}
+
+.story-footer {
+  margin-top: 4px;
+}
+
+.read-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  color: var(--muted);
+  user-select: none;
+}
+
+.read-checkbox input[type="checkbox"] {
+  accent-color: var(--gold);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.story-item:not(.unread) .read-checkbox span {
   color: var(--gold);
 }
 

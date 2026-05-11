@@ -13,6 +13,12 @@ export default function ArticleCard({ article, onMarkRead }) {
     // invalid URL
   }
 
+  function handleCheckbox(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!article.is_read) onMarkRead(article.id)
+  }
+
   return (
     <li className={`story-item${!article.is_read ? ' unread' : ''}`}>
       <a
@@ -37,6 +43,16 @@ export default function ArticleCard({ article, onMarkRead }) {
             )}
           </div>
           <h2 className="story-title">{article.title}</h2>
+          <div className="story-footer">
+            <label className="read-checkbox" onClick={handleCheckbox}>
+              <input
+                type="checkbox"
+                checked={!!article.is_read}
+                readOnly
+              />
+              <span>{article.is_read ? 'Read' : 'Mark as read'}</span>
+            </label>
+          </div>
         </div>
       </a>
     </li>

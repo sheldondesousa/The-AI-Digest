@@ -7,7 +7,7 @@ import SchedulerPanel from './components/SchedulerPanel'
 export default function App() {
   const [tab, setTab] = useState('feed')
   const [articles, setArticles] = useState([])
-  const [filters, setFilters] = useState({ category: '', unread: false })
+  const [filters, setFilters] = useState({ category: '', unread: false, sort: 'desc' })
   const [refreshing, setRefreshing] = useState(false)
   const [loading, setLoading] = useState(true)
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light')
@@ -21,6 +21,7 @@ export default function App() {
     const params = new URLSearchParams()
     if (filters.category) params.set('category', filters.category)
     if (filters.unread) params.set('unread', 'true')
+    params.set('sort', filters.sort)
     const res = await fetch(`/api/articles?${params}`)
     const data = await res.json()
     setArticles(data)

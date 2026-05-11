@@ -7,7 +7,7 @@ const router = express.Router();
 let refreshing = false;
 
 router.get('/articles', (req, res) => {
-  const { category, unread } = req.query;
+  const { category, unread, sort } = req.query;
   let query = 'SELECT * FROM articles WHERE 1=1';
   const params = [];
 
@@ -19,7 +19,8 @@ router.get('/articles', (req, res) => {
     query += ' AND is_read = 0';
   }
 
-  query += ' ORDER BY published_at DESC';
+  query += sort === 'asc' ? ' ORDER BY published_at ASC' : ' ORDER BY published_at DESC';
+
   res.json(db.prepare(query).all(...params));
 });
 
