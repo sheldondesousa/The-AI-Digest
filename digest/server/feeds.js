@@ -26,6 +26,12 @@ function extractImage(item) {
   return null;
 }
 
+function toISO(dateStr) {
+  if (!dateStr) return new Date().toISOString();
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
+}
+
 export async function refreshFeeds() {
   const feeds = db.prepare('SELECT * FROM feeds WHERE is_active = 1').all();
 
@@ -54,7 +60,7 @@ export async function refreshFeeds() {
           feed.category,
           content,
           image,
-          item.pubDate || new Date().toISOString()
+          toISO(item.pubDate)
         );
 
         newCount++;

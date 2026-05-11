@@ -19,7 +19,9 @@ router.get('/articles', (req, res) => {
     query += ' AND is_read = 0';
   }
 
-  query += sort === 'asc' ? ' ORDER BY published_at ASC' : ' ORDER BY published_at DESC';
+  query += sort === 'asc'
+    ? ' ORDER BY datetime(published_at) ASC'
+    : ' ORDER BY datetime(published_at) DESC';
 
   res.json(db.prepare(query).all(...params));
 });
