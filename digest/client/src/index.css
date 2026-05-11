@@ -200,8 +200,18 @@ h1 {
 }
 
 .story-thumbnail--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--badge-bg);
   border-radius: 6px;
+}
+
+.story-favicon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  opacity: 0.75;
 }
 
 .story-content {

@@ -5,6 +5,14 @@ export default function ArticleCard({ article, onMarkRead }) {
     year: 'numeric',
   })
 
+  let faviconUrl = null
+  try {
+    const { hostname } = new URL(article.url)
+    faviconUrl = `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`
+  } catch {
+    // invalid URL
+  }
+
   return (
     <li className={`story-item${!article.is_read ? ' unread' : ''}`}>
       <a
@@ -17,7 +25,9 @@ export default function ArticleCard({ article, onMarkRead }) {
         {article.image ? (
           <img className="story-thumbnail" src={article.image} alt="" />
         ) : (
-          <div className="story-thumbnail story-thumbnail--placeholder" />
+          <div className="story-thumbnail story-thumbnail--placeholder">
+            {faviconUrl && <img className="story-favicon" src={faviconUrl} alt={article.source} />}
+          </div>
         )}
         <div className="story-content">
           <div className="story-meta">
