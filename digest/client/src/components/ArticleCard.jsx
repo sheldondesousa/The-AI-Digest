@@ -12,7 +12,7 @@ export default function ArticleCard({ article, onMarkRead }) {
   let faviconUrl = null
   try {
     const { hostname } = new URL(article.url)
-    faviconUrl = `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`
+    faviconUrl = `/api/favicon-proxy?domain=${hostname}`
   } catch {
     // invalid URL
   }
@@ -26,7 +26,7 @@ export default function ArticleCard({ article, onMarkRead }) {
       canvas.height = size
       const ctx = canvas.getContext('2d')
       ctx.drawImage(img, 0, 0, size, size)
-      // Sample the four corners to detect the favicon background color
+      // Sample the four corners to find the favicon background color
       const corners = [[0, 0], [size - 1, 0], [0, size - 1], [size - 1, size - 1]]
       for (const [x, y] of corners) {
         const [r, g, b, a] = ctx.getImageData(x, y, 1, 1).data
@@ -36,7 +36,7 @@ export default function ArticleCard({ article, onMarkRead }) {
         }
       }
     } catch {
-      // Cross-origin restriction — keep default placeholder background
+      // Keep default placeholder background
     }
   }
 

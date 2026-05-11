@@ -70,4 +70,22 @@ router.get('/status', (req, res) => {
   res.json({ nextRun: getNextRun(), refreshing });
 });
 
+// Proxy favicon through the server so the client can read pixels from a same-origin image.
+router.get('/favicon-proxy', async (req, res) => {
+  const { domain } = req.query;
+  if (!domain) return res.status(400).end();
+  try {
+    const url = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=128`;
+    const response = await fetch(url);
+    if (!response.ok) return res.status(404).end();
+    const buffer = await response.arrayBuffer();
+    const contentType = response.headers.get('content-type') || 'image/png';
+    res.set('Content-Type', contentType);
+    res.set('Cache-Control', 'public, max-age=86400');
+    res.send(Buffer.from(buffer));
+  } catch {
+    res.status(500).end();
+  }
+});
+
 export default router;
