@@ -1,4 +1,8 @@
+import { useState } from 'react'
+
 export default function ArticleCard({ article, onMarkRead }) {
+  const [placeholderBg, setPlaceholderBg] = useState(null)
+
   const date = new Date(article.published_at).toLocaleDateString('en-US', {
     month: '2-digit',
     day: '2-digit',
@@ -11,6 +15,29 @@ export default function ArticleCard({ article, onMarkRead }) {
     faviconUrl = `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`
   } catch {
     // invalid URL
+  }
+
+  function handleFaviconLoad(e) {
+    try {
+      const img = e.target
+      const canvas = document.createElement('canvas')
+      const size = 64
+      canvas.width = size
+      canvas.height = size
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(img, 0, 0, size, size)
+      // Sample the four corners to detect the favicon background color
+      const corners = [[0, 0], [size - 1, 0], [0, size - 1], [size - 1, size - 1]]
+      for (const [x, y] of corners) {
+        const [r, g, b, a] = ctx.getImageData(x, y, 1, 1).data
+        if (a > 200) {
+          setPlaceholderBg(`rgb(${r},${g},${b})`)
+          return
+        }
+      }
+    } catch {
+      // Cross-origin restriction — keep default placeholder background
+    }
   }
 
   const preview = article.summary
@@ -35,8 +62,18 @@ export default function ArticleCard({ article, onMarkRead }) {
         {article.image ? (
           <img className="story-thumbnail" src={article.image} alt="" />
         ) : (
-          <div className="story-thumbnail story-thumbnail--placeholder">
-            {faviconUrl && <img className="story-favicon" src={faviconUrl} alt={article.source} />}
+          <div
+            className="story-thumbnail story-thumbnail--placeholder"
+            style={placeholderBg ? { background: placeholderBg, borderColor: placeholderBg } : undefined}
+          >
+            {faviconUrl && (
+              <img
+                className="story-favicon"
+                src={faviconUrl}
+                alt={article.source}
+                onLoad={handleFaviconLoad}
+              />
+            )}
           </div>
         )}
         <div className="story-content">
