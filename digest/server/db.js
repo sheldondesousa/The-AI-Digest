@@ -23,10 +23,18 @@ db.exec(`
     source TEXT NOT NULL,
     category TEXT DEFAULT 'General',
     summary TEXT,
+    image TEXT,
     published_at TEXT,
     is_read INTEGER DEFAULT 0
   );
 `);
+
+// Add image column to existing databases that predate this column.
+try {
+  db.exec('ALTER TABLE articles ADD COLUMN image TEXT');
+} catch {
+  // Column already exists — safe to ignore.
+}
 
 // Remove old/replaced seed entries from any existing database.
 db.prepare(`DELETE FROM feeds WHERE url IN (
@@ -44,7 +52,6 @@ db.prepare(`DELETE FROM feeds WHERE url IN (
 )`).run();
 
 const seedFeeds = [
-  // Anthropic has no official RSS — this is a community-maintained mirror of anthropic.com/news
   { name: 'Anthropic News',  url: 'https://raw.githubusercontent.com/taobojlen/anthropic-rss-feed/main/anthropic_news_rss.xml', category: 'AI Research' },
   { name: 'OpenAI Blog',     url: 'https://openai.com/news/rss.xml',                                   category: 'AI Research' },
   { name: 'Google DeepMind', url: 'https://blog.google/technology/google-deepmind/rss/',               category: 'AI Research' },
