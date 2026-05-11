@@ -46,7 +46,7 @@
   --category-pill-bg: transparent;
   --category-pill-text: #71717A;
   --story-title-weight: 700;
-  --header-border: #18181B;
+  --header-border: var(--app-title-color);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
