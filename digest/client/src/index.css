@@ -1,22 +1,26 @@
 /* Dark theme */
 :root,
 [data-theme="dark"] {
-  --bg: #0f0f0f;
+  --bg: #1a1a1a;
   --surface: #1a1a1a;
-  --border: #2a2a2a;
-  --text: #e8e8e8;
-  --text-secondary: #27272A;
-  --muted: #71717A;
+  --border: rgba(255,255,255,0.08);
+  --text: #e8e6e1;
+  --text-secondary: #999995;
+  --muted: #777774;
   --tab-active: #A1A1AA;
   --tab-inactive: #71717A;
   --gold: #c9a84c;
   --gold-dim: #8a6f2e;
   --unread-bg: #c9a84c12;
-  --input-bg: #1a1a1a;
-  --badge-bg: #2a2a2a;
-  --category-color: #9d9dd4;
-  --placeholder-bg: #1a1a1a;
+  --input-bg: #252525;
+  --badge-bg: #2c2c2c;
+  --placeholder-bg: #252525;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --app-title-color: #ede9e4;
+  --tagline-color: #888882;
+  --category-pill-bg: #2c2c2c;
+  --category-pill-text: #9a9a96;
+  --story-title-weight: 500;
 }
 
 /* Light theme */
@@ -34,9 +38,13 @@
   --unread-bg: #b8860b08;
   --input-bg: #fff;
   --badge-bg: #f4f4f5;
-  --category-color: #71717A;
   --placeholder-bg: #ffffff;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --app-title-color: #18181B;
+  --tagline-color: #A1A1AA;
+  --category-pill-bg: transparent;
+  --category-pill-text: #71717A;
+  --story-title-weight: 700;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +76,7 @@ h1 {
   font-family: var(--font-sans);
   font-size: 2rem;
   font-weight: 700;
-  color: #18181B;
+  color: var(--app-title-color);
   letter-spacing: 0.01em;
 }
 
@@ -77,7 +85,7 @@ h1 {
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 400;
-  color: var(--muted);
+  color: var(--tagline-color);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-top: 0.2rem;
@@ -151,7 +159,13 @@ h1 {
   transition: background 0.2s, color 0.2s;
 }
 
+[data-theme="dark"] .refresh-btn {
+  border-color: var(--border);
+  color: var(--text);
+}
+
 .refresh-btn:hover:not(:disabled) { background: #27272A; color: #ffffff; }
+[data-theme="dark"] .refresh-btn:hover:not(:disabled) { background: var(--text); color: var(--bg); }
 .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Filter Bar */
@@ -260,13 +274,16 @@ h1 {
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 400;
-  color: var(--tab-active);
+  color: var(--category-pill-text);
+  background: var(--category-pill-bg);
+  border-radius: 4px;
+  padding: 2px 7px;
 }
 
 .story-title {
   font-family: var(--font-sans);
   font-size: 1.0625rem;
-  font-weight: 700;
+  font-weight: var(--story-title-weight);
   line-height: 1.45;
   color: var(--text);
 }
