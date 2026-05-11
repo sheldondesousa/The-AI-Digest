@@ -13,6 +13,7 @@
   --input-bg: #1a1a1a;
   --badge-bg: #2a2a2a;
   --category-color: #9d9dd4;
+  --placeholder-bg: #1a1a1a;
 }
 
 /* Light theme */
@@ -29,6 +30,7 @@
   --input-bg: #fff;
   --badge-bg: #f0f0f0;
   --category-color: #7b7bb5;
+  --placeholder-bg: #ffffff;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -203,7 +205,8 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--badge-bg);
+  background: var(--placeholder-bg);
+  border: 1px solid var(--border);
   border-radius: 6px;
 }
 
@@ -211,7 +214,6 @@ h1 {
   width: 48px;
   height: 48px;
   object-fit: contain;
-  opacity: 0.75;
 }
 
 .story-content {
