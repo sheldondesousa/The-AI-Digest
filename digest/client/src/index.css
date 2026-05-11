@@ -21,6 +21,7 @@
   --category-pill-bg: #2c2c2c;
   --category-pill-text: #9a9a96;
   --story-title-weight: 500;
+  --header-border: rgba(255,255,255,0.08);
 }
 
 /* Light theme */
@@ -45,6 +46,7 @@
   --category-pill-bg: transparent;
   --category-pill-text: #71717A;
   --story-title-weight: 700;
+  --header-border: #18181B;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -69,7 +71,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 2rem 0 1.5rem;
-  border-bottom: 2px solid #18181B;
+  border-bottom: 2px solid var(--header-border);
 }
 
 h1 {
