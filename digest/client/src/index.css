@@ -1,4 +1,4 @@
-/* Dark theme (default) */
+/* Dark theme */
 :root,
 [data-theme="dark"] {
   --bg: #0f0f0f;
@@ -6,7 +6,9 @@
   --border: #2a2a2a;
   --text: #e8e8e8;
   --text-secondary: #b0b0b0;
-  --muted: #888;
+  --muted: #71717A;
+  --tab-active: #A1A1AA;
+  --tab-inactive: #71717A;
   --gold: #c9a84c;
   --gold-dim: #8a6f2e;
   --unread-bg: #c9a84c12;
@@ -21,15 +23,17 @@
   --bg: #ffffff;
   --surface: #ffffff;
   --border: #e5e5e5;
-  --text: #111111;
-  --text-secondary: #444444;
-  --muted: #888888;
+  --text: #18181B;
+  --text-secondary: #27272A;
+  --muted: #A1A1AA;
+  --tab-active: #71717A;
+  --tab-inactive: #A1A1AA;
   --gold: #8a6200;
   --gold-dim: #b8860b;
   --unread-bg: #b8860b08;
   --input-bg: #fff;
-  --badge-bg: #f0f0f0;
-  --category-color: #7b7bb5;
+  --badge-bg: #f4f4f5;
+  --category-color: #71717A;
   --placeholder-bg: #ffffff;
 }
 
@@ -93,8 +97,8 @@ h1 {
 }
 
 .theme-toggle:hover {
-  border-color: var(--gold);
-  color: var(--gold);
+  border-color: var(--tab-active);
+  color: var(--tab-active);
 }
 
 /* Tabs */
@@ -108,7 +112,7 @@ h1 {
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  color: var(--muted);
+  color: var(--tab-inactive);
   cursor: pointer;
   font-family: inherit;
   font-size: 0.85rem;
@@ -120,8 +124,8 @@ h1 {
 }
 
 .tabs button.active {
-  border-bottom-color: var(--gold);
-  color: var(--gold);
+  border-bottom-color: var(--tab-active);
+  color: var(--tab-active);
 }
 
 /* Buttons */
@@ -155,7 +159,7 @@ h1 {
   background: var(--input-bg);
   border: 1px solid var(--border);
   border-radius: 4px;
-  color: var(--text);
+  color: var(--text-secondary);
   font-family: inherit;
   font-size: 0.85rem;
   padding: 0.4rem 0.8rem;
@@ -171,7 +175,7 @@ h1 {
   font-size: 0.85rem;
 }
 
-.toggle input { accent-color: var(--gold); cursor: pointer; }
+.toggle input { accent-color: var(--tab-active); cursor: pointer; }
 
 /* Story List */
 .story-list {
@@ -242,7 +246,7 @@ h1 {
 
 .story-category {
   font-size: 0.8125rem;
-  color: var(--category-color);
+  color: var(--tab-active);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -255,7 +259,7 @@ h1 {
 }
 
 .story-link:hover .story-title {
-  color: var(--gold);
+  color: var(--text-secondary);
 }
 
 .story-footer {
@@ -273,7 +277,7 @@ h1 {
 }
 
 .read-checkbox input[type="checkbox"] {
-  accent-color: var(--gold);
+  accent-color: var(--tab-active);
   width: 14px;
   height: 14px;
   cursor: pointer;
@@ -281,7 +285,7 @@ h1 {
 }
 
 .story-item:not(.unread) .read-checkbox span {
-  color: var(--gold);
+  color: var(--tab-active);
 }
 
 .loading, .empty {
@@ -293,7 +297,7 @@ h1 {
 
 /* Sources Tab */
 .sources-tab { max-width: 640px; }
-.sources-tab h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Georgia', serif; }
+.sources-tab h2 { color: var(--text); font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Georgia', serif; }
 .sources-tab h3 {
   color: var(--muted);
   font-size: 0.8rem;
@@ -316,14 +320,14 @@ h1 {
 
 .feed-item.inactive { opacity: 0.45; }
 .feed-item > div { display: flex; flex-direction: column; gap: 0.3rem; }
-.feed-item strong { font-size: 0.95rem; }
+.feed-item strong { font-size: 0.95rem; color: var(--text); }
 .feed-item small { color: var(--muted); font-size: 0.72rem; }
 
 .toggle-btn {
   background: none;
   border: 1px solid var(--border);
   border-radius: 4px;
-  color: var(--muted);
+  color: var(--tab-inactive);
   cursor: pointer;
   font-size: 0.75rem;
   padding: 0.3rem 0.75rem;
@@ -331,7 +335,7 @@ h1 {
   white-space: nowrap;
 }
 
-.toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
+.toggle-btn:hover { border-color: var(--tab-active); color: var(--tab-active); }
 
 .add-feed-form {
   display: flex;
@@ -349,13 +353,13 @@ h1 {
   padding: 0.6rem 0.9rem;
 }
 
-.add-feed-form input:focus { border-color: var(--gold-dim); outline: none; }
+.add-feed-form input:focus { border-color: var(--tab-active); outline: none; }
 .add-feed-form button { align-self: flex-start; }
 .error { color: #e05c5c; font-size: 0.85rem; }
 
 /* Scheduler Panel */
 .scheduler-panel { max-width: 480px; }
-.scheduler-panel h2 { color: var(--gold); font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Georgia', serif; }
+.scheduler-panel h2 { color: var(--text); font-size: 1.1rem; margin-bottom: 1.5rem; font-family: 'Georgia', serif; }
 
 .scheduler-card {
   background: var(--surface);
@@ -375,6 +379,6 @@ h1 {
 
 .scheduler-row:last-child { border-bottom: none; }
 .scheduler-row span { color: var(--muted); font-size: 0.85rem; }
-.scheduler-row strong { font-size: 0.9rem; }
-.refreshing-text { color: var(--gold); }
+.scheduler-row strong { font-size: 0.9rem; color: var(--text-secondary); }
+.refreshing-text { color: var(--tab-active); }
 .idle-text { color: #4a9e4a; }
